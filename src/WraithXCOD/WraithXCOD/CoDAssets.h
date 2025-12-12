@@ -60,7 +60,8 @@ enum class SupportedGameFlags
     Files,
     SP,
     MP,
-    ZM
+    ZM,
+    MOD
 };
 
 // A set of FindGame() results

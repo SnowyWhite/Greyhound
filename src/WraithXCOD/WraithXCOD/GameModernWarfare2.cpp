@@ -24,6 +24,11 @@ std::array<DBGameInfo, 1> GameModernWarfare2::MultiPlayerOffsets =
 {{
     { 0x6F81D0, 0x6F7F08, 0x6F9F00, 0 }
 }};
+// IW4x
+std::array<DBGameInfo, 1> GameModernWarfare2::IW4xOffsets =
+{{
+    { 0x7998A8, 0x7995E8 , 0x1D00100, 0 }
+}};
 
 // -- Finished with databases
 
@@ -43,8 +48,8 @@ bool GameModernWarfare2::LoadOffsets()
     // Attempt to load the game offsets
     if (CoDAssets::GameInstance != nullptr)
     {
-        // Check built-in offsets via game exe mode (SP/MP)
-        for (auto& GameOffsets : (CoDAssets::GameFlags == SupportedGameFlags::SP) ? SinglePlayerOffsets : MultiPlayerOffsets)
+        // Check built-in offsets via game exe mode (SP/MP/MOD)
+        for (auto& GameOffsets : (CoDAssets::GameFlags == SupportedGameFlags::SP) ? SinglePlayerOffsets : (CoDAssets::GameFlags == SupportedGameFlags::MP) ? MultiPlayerOffsets : IW4xOffsets)
         {
             // Read required offsets (XANIM, XMODEL, LOADED SOUND)
             CoDAssets::GameOffsetInfos.emplace_back(CoDAssets::GameInstance->Read<uint32_t>(GameOffsets.DBAssetPools + (4 * 2)));
