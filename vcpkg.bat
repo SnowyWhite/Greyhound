@@ -1,1 +1,0 @@
-vcpkg install nlohmann-json:x64-windows-static
